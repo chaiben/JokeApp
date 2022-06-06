@@ -27,6 +27,16 @@ main{
     padding: 4rem;
     text-align: center;
 }
+.feedback-joke{
+    text-decoration: none;
+    font-size: 2rem;
+}
+#feedback{
+    display: none;
+    justify-content: space-around;
+    margin: auto;
+    padding: 2rem 0;
+}
 #joke{
     padding: 2.5rem 0;
 }
