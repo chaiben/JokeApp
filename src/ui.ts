@@ -1,11 +1,14 @@
-import {JOKEURL, WEATHERURL} from './variables.js';
+import {CHUCKNORISURL, ICANHAZDADJOKE, WEATHERURL} from './variables.js';
 
 export default class UI {
   jokeElement: HTMLElement;
   temperatureElement: HTMLElement;
   weatherImageElement: HTMLElement;
+  jokeCounter: number;
+  getJokeBtn: HTMLElement;
 
   constructor() {
+    this.jokeCounter = 0;
     // Element variables
     this.jokeElement = document.querySelector('#joke') as HTMLElement;
     this.temperatureElement = document.querySelector(
@@ -14,6 +17,7 @@ export default class UI {
     this.weatherImageElement = document.querySelector(
       '#weather-image'
     ) as HTMLElement;
+    this.getJokeBtn = document.querySelector('#get-joke') as HTMLElement;
 
     // Init Events
     this.initEvents();
@@ -62,23 +66,42 @@ export default class UI {
       });
   }
 
+  getIcanhazdadJoke() {
+    fetch(ICANHAZDADJOKE, {
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setJoke(data.joke);
+        this.showFeedback();
+      });
+  }
+
+  getChuckNorisJoke() {
+    fetch(CHUCKNORISURL, {
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setJoke(data.value);
+        this.showFeedback();
+      });
+  }
+
   eventNextJokeButtonClick() {
-    const getJokeBtn = document.querySelector('#get-joke') as HTMLElement;
-    getJokeBtn.addEventListener('click', () => {
-      fetch(JOKEURL, {
-        headers: {
-          Accept: 'application/json',
-        },
-      })
-        .then(response => response.json())
-        .then(data => {
-          this.setJoke(data.joke);
-          this.showFeedback();
-        });
+    this.getJokeBtn.addEventListener('click', () => {
+      this.jokeCounter % 2
+        ? this.getChuckNorisJoke()
+        : this.getIcanhazdadJoke();
+      this.jokeCounter++;
     });
   }
 
-  eventFeedbackClick() {
+  eventFeedbackClick(): void {
     const reportAcudits: {joke: string; score: number; data: string}[] = [];
     const feedbackJokeElements = document.getElementsByClassName(
       'feedback-joke'

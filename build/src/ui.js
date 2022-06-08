@@ -1,10 +1,12 @@
-import { JOKEURL, WEATHERURL } from './variables.js';
+import { CHUCKNORISURL, ICANHAZDADJOKE, WEATHERURL } from './variables.js';
 export default class UI {
     constructor() {
+        this.jokeCounter = 0;
         // Element variables
         this.jokeElement = document.querySelector('#joke');
         this.temperatureElement = document.querySelector('#temperature');
         this.weatherImageElement = document.querySelector('#weather-image');
+        this.getJokeBtn = document.querySelector('#get-joke');
         // Init Events
         this.initEvents();
         // Initial load
@@ -43,19 +45,36 @@ export default class UI {
             this.setWeatherImg(data.weather[0].icon);
         });
     }
+    getIcanhazdadJoke() {
+        fetch(ICANHAZDADJOKE, {
+            headers: {
+                Accept: 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.setJoke(data.joke);
+            this.showFeedback();
+        });
+    }
+    getChuckNorisJoke() {
+        fetch(CHUCKNORISURL, {
+            headers: {
+                Accept: 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.setJoke(data.value);
+            this.showFeedback();
+        });
+    }
     eventNextJokeButtonClick() {
-        const getJokeBtn = document.querySelector('#get-joke');
-        getJokeBtn.addEventListener('click', () => {
-            fetch(JOKEURL, {
-                headers: {
-                    Accept: 'application/json',
-                },
-            })
-                .then(response => response.json())
-                .then(data => {
-                this.setJoke(data.joke);
-                this.showFeedback();
-            });
+        this.getJokeBtn.addEventListener('click', () => {
+            this.jokeCounter % 2
+                ? this.getChuckNorisJoke()
+                : this.getIcanhazdadJoke();
+            this.jokeCounter++;
         });
     }
     eventFeedbackClick() {

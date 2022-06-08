@@ -2,6 +2,8 @@ export default class UI {
     jokeElement: HTMLElement;
     temperatureElement: HTMLElement;
     weatherImageElement: HTMLElement;
+    jokeCounter: number;
+    getJokeBtn: HTMLElement;
     constructor();
     initEvents(): void;
     setTemperature(temp: number): void;
@@ -9,6 +11,8 @@ export default class UI {
     setJoke(value: string): void;
     showFeedback(): void;
     loadWeatherInfo(): void;
+    getIcanhazdadJoke(): void;
+    getChuckNorisJoke(): void;
     eventNextJokeButtonClick(): void;
     eventFeedbackClick(): void;
 }
