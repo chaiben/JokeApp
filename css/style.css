@@ -7,6 +7,10 @@ button {
   color: white;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 main {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -20,6 +24,10 @@ main {
       -ms-flex-pack: center;
           justify-content: center;
   width: 100wh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .container {
@@ -47,5 +55,14 @@ main {
 
 #joke {
   padding: 2.5rem 0;
+}
+
+#weather {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=style.css.map */

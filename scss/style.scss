@@ -10,6 +10,9 @@ button{
     border: 0px;
     color: white;
 }
+button:hover{
+    cursor: pointer;
+}
 main{
     align-items: center;
     background-color: $lightGrey;
@@ -17,6 +20,7 @@ main{
     height: 100vh;
     justify-content: center;
     width: 100wh;
+    flex-direction: column;
 }
 .container{
     -webkit-box-shadow: 0px 7px 16px 2px rgba(0,0,0,0.54); 
@@ -39,4 +43,8 @@ main{
 }
 #joke{
     padding: 2.5rem 0;
+}
+#weather{
+    display: flex;
+    align-items: center;
 }
