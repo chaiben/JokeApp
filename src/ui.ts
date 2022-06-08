@@ -6,6 +6,7 @@ export default class UI {
   weatherImageElement: HTMLElement;
   jokeCounter: number;
   getJokeBtn: HTMLElement;
+  backgroundElement: HTMLElement;
 
   constructor() {
     this.jokeCounter = 0;
@@ -18,11 +19,15 @@ export default class UI {
       '#weather-image'
     ) as HTMLElement;
     this.getJokeBtn = document.querySelector('#get-joke') as HTMLElement;
+    this.backgroundElement = document.querySelector(
+      '#background'
+    ) as HTMLElement;
 
     // Init Events
     this.initEvents();
 
     // Initial load
+    this.loadJoke();
     this.loadWeatherInfo();
   }
 
@@ -32,7 +37,7 @@ export default class UI {
   }
 
   setTemperature(temp: number) {
-    this.temperatureElement.innerHTML = Math.round(temp).toString() + ' ºC /';
+    this.temperatureElement.innerHTML = Math.round(temp).toString() + ' ºC';
   }
 
   setWeatherImg(src: string) {
@@ -42,7 +47,7 @@ export default class UI {
   }
 
   setJoke(value: string) {
-    this.jokeElement.innerHTML = value;
+    this.jokeElement.innerHTML = `"${value}"`;
   }
 
   showFeedback() {
@@ -91,14 +96,20 @@ export default class UI {
         this.showFeedback();
       });
   }
+  loadJoke() {
+    this.jokeCounter % 2 ? this.getChuckNorisJoke() : this.getIcanhazdadJoke();
+    this.jokeCounter++;
+  }
 
   eventNextJokeButtonClick() {
     this.getJokeBtn.addEventListener('click', () => {
-      this.jokeCounter % 2
-        ? this.getChuckNorisJoke()
-        : this.getIcanhazdadJoke();
-      this.jokeCounter++;
+      this.loadJoke();
+      this.changeBackground(this.jokeCounter % 3);
     });
+  }
+
+  changeBackground(n: number) {
+    this.backgroundElement.className = 'background-' + n;
   }
 
   eventFeedbackClick(): void {

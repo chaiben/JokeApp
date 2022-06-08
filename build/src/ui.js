@@ -7,9 +7,11 @@ export default class UI {
         this.temperatureElement = document.querySelector('#temperature');
         this.weatherImageElement = document.querySelector('#weather-image');
         this.getJokeBtn = document.querySelector('#get-joke');
+        this.backgroundElement = document.querySelector('#background');
         // Init Events
         this.initEvents();
         // Initial load
+        this.loadJoke();
         this.loadWeatherInfo();
     }
     initEvents() {
@@ -17,7 +19,7 @@ export default class UI {
         this.eventFeedbackClick();
     }
     setTemperature(temp) {
-        this.temperatureElement.innerHTML = Math.round(temp).toString() + ' ºC /';
+        this.temperatureElement.innerHTML = Math.round(temp).toString() + ' ºC';
     }
     setWeatherImg(src) {
         const imgElement = document.createElement('img');
@@ -25,7 +27,7 @@ export default class UI {
         this.weatherImageElement.appendChild(imgElement);
     }
     setJoke(value) {
-        this.jokeElement.innerHTML = value;
+        this.jokeElement.innerHTML = `"${value}"`;
     }
     showFeedback() {
         const feedbackElement = document.querySelector('#feedback');
@@ -69,13 +71,18 @@ export default class UI {
             this.showFeedback();
         });
     }
+    loadJoke() {
+        this.jokeCounter % 2 ? this.getChuckNorisJoke() : this.getIcanhazdadJoke();
+        this.jokeCounter++;
+    }
     eventNextJokeButtonClick() {
         this.getJokeBtn.addEventListener('click', () => {
-            this.jokeCounter % 2
-                ? this.getChuckNorisJoke()
-                : this.getIcanhazdadJoke();
-            this.jokeCounter++;
+            this.loadJoke();
+            this.changeBackground(this.jokeCounter % 3);
         });
+    }
+    changeBackground(n) {
+        this.backgroundElement.className = 'background-' + n;
     }
     eventFeedbackClick() {
         const reportAcudits = [];
