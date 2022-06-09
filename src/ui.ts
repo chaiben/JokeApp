@@ -1,4 +1,6 @@
-import {CHUCKNORISURL, ICANHAZDADJOKE, WEATHERURL} from './variables.js';
+import Icanhazdadjoke from './icanhazdadjoke.js';
+import ChuckNorrisJoke from './chucknorrisJoke.js';
+import FccWeather from './fccweather.js';
 
 export default class UI {
   jokeElement: HTMLElement;
@@ -55,49 +57,30 @@ export default class UI {
     feedbackElement.style.display = 'flex';
   }
 
-  loadWeatherInfo() {
-    fetch(WEATHERURL, {
-      headers: {
-        Accept: 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Show temperature
-        this.setTemperature(data.main.temp);
-
-        // Add img
-        this.setWeatherImg(data.weather[0].icon);
-      });
+  async loadWeatherInfo() {
+    const weather = new FccWeather();
+    await weather.init();
+    this.setTemperature(weather.getTemperature());
+    this.setWeatherImg(weather.getWeatherImg());
   }
 
-  getIcanhazdadJoke() {
-    fetch(ICANHAZDADJOKE, {
-      headers: {
-        Accept: 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setJoke(data.joke);
-        this.showFeedback();
-      });
+  async getIcanhazdadJoke() {
+    const joke = new Icanhazdadjoke();
+    const result = await joke.getJoke();
+    return result;
   }
 
-  getChuckNorisJoke() {
-    fetch(CHUCKNORISURL, {
-      headers: {
-        Accept: 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setJoke(data.value);
-        this.showFeedback();
-      });
+  async getChuckNorrisJoke() {
+    const joke = new ChuckNorrisJoke();
+    const result = await joke.getJoke();
+    return result;
   }
-  loadJoke() {
-    this.jokeCounter % 2 ? this.getChuckNorisJoke() : this.getIcanhazdadJoke();
+  async loadJoke() {
+    const joke: string =
+      this.jokeCounter % 2
+        ? await this.getChuckNorrisJoke()
+        : await this.getIcanhazdadJoke();
+    this.setJoke(joke);
     this.jokeCounter++;
   }
 

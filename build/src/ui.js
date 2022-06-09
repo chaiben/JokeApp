@@ -1,4 +1,15 @@
-import { CHUCKNORISURL, ICANHAZDADJOKE, WEATHERURL } from './variables.js';
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import Icanhazdadjoke from './icanhazdadjoke.js';
+import ChuckNorrisJoke from './chucknorrisJoke.js';
+import FccWeather from './fccweather.js';
 export default class UI {
     constructor() {
         this.jokeCounter = 0;
@@ -34,46 +45,35 @@ export default class UI {
         feedbackElement.style.display = 'flex';
     }
     loadWeatherInfo() {
-        fetch(WEATHERURL, {
-            headers: {
-                Accept: 'application/json',
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-            // Show temperature
-            this.setTemperature(data.main.temp);
-            // Add img
-            this.setWeatherImg(data.weather[0].icon);
+        return __awaiter(this, void 0, void 0, function* () {
+            const weather = new FccWeather();
+            yield weather.init();
+            this.setTemperature(weather.getTemperature());
+            this.setWeatherImg(weather.getWeatherImg());
         });
     }
     getIcanhazdadJoke() {
-        fetch(ICANHAZDADJOKE, {
-            headers: {
-                Accept: 'application/json',
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-            this.setJoke(data.joke);
-            this.showFeedback();
+        return __awaiter(this, void 0, void 0, function* () {
+            const joke = new Icanhazdadjoke();
+            const result = yield joke.getJoke();
+            return result;
         });
     }
-    getChuckNorisJoke() {
-        fetch(CHUCKNORISURL, {
-            headers: {
-                Accept: 'application/json',
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-            this.setJoke(data.value);
-            this.showFeedback();
+    getChuckNorrisJoke() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const joke = new ChuckNorrisJoke();
+            const result = yield joke.getJoke();
+            return result;
         });
     }
     loadJoke() {
-        this.jokeCounter % 2 ? this.getChuckNorisJoke() : this.getIcanhazdadJoke();
-        this.jokeCounter++;
+        return __awaiter(this, void 0, void 0, function* () {
+            const joke = this.jokeCounter % 2
+                ? yield this.getChuckNorrisJoke()
+                : yield this.getIcanhazdadJoke();
+            this.setJoke(joke);
+            this.jokeCounter++;
+        });
     }
     eventNextJokeButtonClick() {
         this.getJokeBtn.addEventListener('click', () => {

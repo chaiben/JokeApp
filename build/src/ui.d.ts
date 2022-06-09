@@ -11,10 +11,10 @@ export default class UI {
     setWeatherImg(src: string): void;
     setJoke(value: string): void;
     showFeedback(): void;
-    loadWeatherInfo(): void;
-    getIcanhazdadJoke(): void;
-    getChuckNorisJoke(): void;
-    loadJoke(): void;
+    loadWeatherInfo(): Promise<void>;
+    getIcanhazdadJoke(): Promise<string>;
+    getChuckNorrisJoke(): Promise<string>;
+    loadJoke(): Promise<void>;
     eventNextJokeButtonClick(): void;
     changeBackground(n: number): void;
     eventFeedbackClick(): void;
