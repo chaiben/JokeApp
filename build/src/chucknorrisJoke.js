@@ -25,4 +25,4 @@ export default class ChuckNorrisJoke {
         });
     }
 }
-//# sourceMappingURL=chucknorrisJoke.js.map
+//# sourceMappingURL=chucknorrisjoke.js.map

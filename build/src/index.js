@@ -1,3 +1,4 @@
 import UI from './ui.js';
-new UI();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ui = new UI();
 //# sourceMappingURL=index.js.map

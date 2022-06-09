@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import Icanhazdadjoke from './icanhazdadjoke.js';
-import ChuckNorrisJoke from './chucknorrisJoke.js';
+import ChuckNorrisJoke from './chucknorrisjoke.js';
 import FccWeather from './fccweather.js';
 export default class UI {
     constructor() {
@@ -55,15 +55,13 @@ export default class UI {
     getIcanhazdadJoke() {
         return __awaiter(this, void 0, void 0, function* () {
             const joke = new Icanhazdadjoke();
-            const result = yield joke.getJoke();
-            return result;
+            return yield joke.getJoke();
         });
     }
     getChuckNorrisJoke() {
         return __awaiter(this, void 0, void 0, function* () {
             const joke = new ChuckNorrisJoke();
-            const result = yield joke.getJoke();
-            return result;
+            return yield joke.getJoke();
         });
     }
     loadJoke() {

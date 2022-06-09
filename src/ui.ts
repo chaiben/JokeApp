@@ -1,5 +1,5 @@
 import Icanhazdadjoke from './icanhazdadjoke.js';
-import ChuckNorrisJoke from './chucknorrisJoke.js';
+import ChuckNorrisJoke from './chucknorrisjoke.js';
 import FccWeather from './fccweather.js';
 
 export default class UI {
@@ -66,14 +66,12 @@ export default class UI {
 
   async getIcanhazdadJoke() {
     const joke = new Icanhazdadjoke();
-    const result = await joke.getJoke();
-    return result;
+    return await joke.getJoke();
   }
 
   async getChuckNorrisJoke() {
     const joke = new ChuckNorrisJoke();
-    const result = await joke.getJoke();
-    return result;
+    return await joke.getJoke();
   }
   async loadJoke() {
     const joke: string =
