@@ -109,7 +109,26 @@ export default class UI {
   }
 
   changeBackground(n: number) {
-    this.backgroundElement.className = 'background-' + n;
+    let aux = 1;
+    let opacity = 1;
+    const intervalID = setInterval(() => {
+      if (aux === 1) {
+        if (opacity > 0) {
+          opacity = opacity - 0.1;
+          this.backgroundElement.style.opacity = opacity.toString();
+        } else {
+          this.backgroundElement.className = 'background-' + n;
+          aux = 0;
+        }
+      } else {
+        if (opacity < 1) {
+          opacity = opacity + 0.1;
+          this.backgroundElement.style.opacity = opacity.toString();
+        } else {
+          clearInterval(intervalID);
+        }
+      }
+    }, 20);
   }
 
   eventFeedbackClick(): void {
