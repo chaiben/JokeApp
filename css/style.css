@@ -44,44 +44,44 @@ h1 {
 }
 
 .background-0 .img1 {
-  background-image: url(/img/violet1.svg);
+  background-image: url(../img/violet1.svg);
 }
 
 .background-0 .img2 {
-  background-image: url(/img/violet2.svg);
+  background-image: url(../img/violet2.svg);
 }
 
 .background-0 .img3 {
-  background-image: url(/img/violet3.svg);
+  background-image: url(../img/violet3.svg);
 }
 
 .background-1 .img1 {
-  background-image: url(/img/pink1.svg);
+  background-image: url(../img/pink1.svg);
   background-position: 44% !important;
   background-size: 46rem !important;
 }
 
 .background-1 .img2 {
-  background-image: url(/img/pink2.svg);
+  background-image: url(../img/pink2.svg);
 }
 
 .background-1 .img3 {
-  background-image: url(/img/pink3.svg);
+  background-image: url(../img/pink3.svg);
   left: 0 !important;
 }
 
 .background-2 .img1 {
-  background-image: url(/img/green1.svg);
+  background-image: url(../img/green1.svg);
   background-size: 39rem !important;
 }
 
 .background-2 .img2 {
-  background-image: url(/img/green2.svg);
+  background-image: url(../img/green2.svg);
   right: -7px !important;
 }
 
 .background-2 .img3 {
-  background-image: url(/img/green3.svg);
+  background-image: url(../img/green3.svg);
 }
 
 main {
@@ -194,7 +194,7 @@ button:active {
 }
 
 .face {
-  background-image: url(/img/faces.png);
+  background-image: url(../img/faces.png);
   background-repeat: no-repeat;
   background-size: auto 100%;
   display: inline-block;
