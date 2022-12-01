@@ -6,4 +6,4 @@ This is a simple application that connect with 3 different APIs.
 
 Written in Typescript
 
-[See it working]([https://chaiben.github.io/s5-joke/build/](https://chaiben.github.io/JokeApp/))
+[See it working](https://chaiben.github.io/JokeApp/)
